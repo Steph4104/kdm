@@ -15,7 +15,8 @@
   <![endif]-->
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="js/calcul.js"></script>
+    <script src="js/calcul.js"></script> <!--calcul primary stat-->
+     <script src="js/validation.js"></script><!--validation hit location-->
     <script>
 $(function() {
     $('#no_survivols').click(function() {
@@ -23,8 +24,10 @@ $(function() {
         $('#survivol').prop('disabled', cb1);
           
     });
-});
-        
+
+ });
+
+
     </script>
 </head>
 <body>
@@ -32,7 +35,8 @@ $(function() {
     
 	
 <?php
-$con=mysqli_connect("localhost","root","","kdm");
+require_once 'database.php';
+$con=mysqli_connect($db_host, $db_username, $db_password,$db_name);
 // Check connection
 if (mysqli_connect_errno())
   {
@@ -124,7 +128,9 @@ Special:<input type="number" name="special_luck" id="special_luck" value= ""><br
 
 //Brain
 $brain = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM brain WHERE ID_SURVIVOR = $survivor_id"));
-echo 'Brain: ' . $brain['BRAIN'].'';
+//echo'' . $brain['BRAIN'].'';
+echo 'Brain: ';
+echo'<input type="number" name="luck" id="luck" value= "'. $brain['BRAIN'].'">';
 if ($brain['CASE'] == 1){
 $checked = "checked = 'checked'";
 }
@@ -134,28 +140,87 @@ $checked = "";
 }
 //echo 'Checkbox: ' . $brain['CASE'].
 echo '<input type="checkbox" name="foo" value="1" '.$checked.' /><br>';
-//Hit location
-$hit_location = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM hit_location WHERE ID_SURVIVOR = $survivor_id"));
-echo 'Head: ' . $hit_location['HEAD'].'<br>';
-echo 'Arms: ' . $hit_location['ARMS'].'<br>';
-echo 'Body: ' . $hit_location['BODY'].'<br>';
-echo 'Waist: ' . $hit_location['WAIST'].'<br>';
-echo 'Legs: ' . $hit_location['LEGS'].'<br>';
+//Hit location: Head
+$head = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM head WHERE ID_SURVIVOR = $survivor_id"));
+if ($head['CHECKBOX'] == 1){$checkedhead = "checked = 'checked'";}
+else{$checkedhead = "";}
+echo 'Head: ';
+echo'<input type="number" name="head" id="head" value= "'. $head['HEAD'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this);"  '.$checkedhead.' /><br>';
+
+//Hit location: arms
+$arms = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM arms WHERE ID_SURVIVOR = $survivor_id"));
+if ($arms['CHECKBOX1'] == 1){$checkedarms1 = "checked = 'checked'";}
+else{$checkedarms1 = "";}
+
+if ($arms['CHECKBOX2'] == 1){$checkedarms2 = "checked = 'checked'";}
+else{$checkedarms2 = "";}
+
+echo 'Arms: ';
+echo'<input type="number" name="arms" id="arms" value= "'. $arms['ARMS'].'"><input type="checkbox" id="boxarms1" name="foo" value="1" onclick="alertbox(this)" '.$checkedarms1.' /><input type="checkbox" name="foo" id="boxarms2" value="1" onclick="alertbox2(this)" '.$checkedarms2.' /><br>';
+
+//Hit location: body
+$body = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM body WHERE ID_SURVIVOR = $survivor_id"));
+if ($body['CHECKBOX1'] == 1){$checkedbody1 = "checked = 'checked'";}
+else{$checkedbody1 = "";}
+if ($body['CHECKBOX2'] == 1){$checkedbody2 = "checked = 'checked'";}
+else{$checkedbody2 = "";}
+echo 'Body: ';
+echo'<input type="number" name="body" id="body" value= "'. $body['BODY'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedbody1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedbody2.' /><br>';
+
+//Hit location: waist
+$waist = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM waist WHERE ID_SURVIVOR = $survivor_id"));
+if ($waist['CHECKBOX1'] == 1){
+$checkedwaist1 = "checked = 'checked'";
+}
+else
+{
+$checkedwaist1 = "";
+}
+if ($waist['CHECKBOX2'] == 1){
+$checkedwaist2 = "checked = 'checked'";
+}
+else
+{
+$checkedwaist2 = "";
+}
+echo 'Waist: ';
+echo'<input type="number" name="waist" id="waist" value= "'. $waist['WAIST'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedwaist1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedwaist2.' /><br>';
+
+//Hit location: legs
+$legs = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM legs WHERE ID_SURVIVOR = $survivor_id"));
+if ($legs['CHECKBOX1'] == 1){
+$checkedlegs1 = "checked = 'checked'";
+}
+else
+{
+$checkedlegs1 = "";
+}
+if ($legs['CHECKBOX2'] == 1){
+$checkedlegs2 = "checked = 'checked'";
+}
+else
+{
+$checkedlegs2 = "";
+}
+echo 'Legs: ';
+echo'<input type="number" name="legs" id="legs" value= "'. $legs['LEGS'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedlegs1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedlegs2.' /><br>';
 
 //Hunt XP
 $hunt_xp = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM hunt_xp WHERE ID_SURVIVOR = $survivor_id"));
-echo 'Hunt XP: ' . $hunt_xp['XP'].'<br>';
+//echo 'Hunt XP: ' . $hunt_xp['XP'].'<br>';
+echo'Hunt XP: <input type="number" name="hunt" id="legs" value= "'. $hunt_xp['XP'].'"><br>';
 //Weapon
+echo'Weapon name: ';
 $weapon = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM weapon WHERE ID_SURVIVOR = $survivor_id"));
-if (empty($weapon['WEAPON_NAME'])){
-  $test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS, settlement.NAME_SETTELMENT,settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT WHERE ID_SURVIVOR = $survivor_id");
+
+$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS, settlement.NAME_SETTELMENT,settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT WHERE ID_SURVIVOR = $survivor_id");
 while ($row=mysqli_fetch_assoc($test))
     {
-    
-   // echo 'extention: '. $row['NAME_SURVIVORS'].' and survivor: '. $row['EXPENTION'].'<br>';
-      $expention = $row['EXPENTION'];
-   // printf ("%s (%s)\n",$row[0],$row[1]);
+     $expention = $row['EXPENTION'];
     }
+
+if (empty($weapon['WEAPON_NAME'])){
+ 
 $sql="SELECT * FROM weapon WHERE W_EXPENTION = $expention";
 
 if ($result=mysqli_query($con,$sql))
@@ -174,14 +239,16 @@ if ($result=mysqli_query($con,$sql))
 
 }else{
     echo 'Name: ' . $weapon['WEAPON_NAME'].'<br>';
+ 
 }
 
 //Weapon proficiency
-$w_proficiency = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM W_PROFICIENCY WHERE ID_SURVIVOR = $survivor_id"));
+$w_proficiency = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM w_proficiency WHERE ID_SURVIVOR = $survivor_id"));
 echo 'Weapon proficiency: ' . $w_proficiency['PROFICIENCY'].'<br>';
 
 //Disorder
 $disorder = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM disorder WHERE ID_SURVIVOR = $survivor_id"));
+
 if ($disorder){
 echo 'Disorder: ' . $disorder['DISORDER_NAME'].'<br>';
 }else{

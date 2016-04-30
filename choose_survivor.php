@@ -20,7 +20,8 @@
     <h1>Kingdom Death Monsters</h1>
    <dd> <h3>the nightmare horror board game</h3></dd>
 <?php
-$con=mysqli_connect("localhost","root","","kdm");
+require_once 'database.php';
+$con=mysqli_connect($db_host, $db_username, $db_password,$db_name);
 // Check connection
 if (mysqli_connect_errno())
   {
