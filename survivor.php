@@ -156,7 +156,7 @@ if ($arms['CHECKBOX2'] == 1){$checkedarms2 = "checked = 'checked'";}
 else{$checkedarms2 = "";}
 
 echo 'Arms: ';
-echo'<input type="number" name="arms" id="arms" value= "'. $arms['ARMS'].'"><input type="checkbox" id="boxarms1" name="foo" value="1" onclick="alertbox(this)" '.$checkedarms1.' /><input type="checkbox" name="foo" id="boxarms2" value="1" onclick="alertbox2(this)" '.$checkedarms2.' /><br>';
+echo'<input type="number" name="arms" id="arms" value= "'. $arms['ARMS'].'"><input type="checkbox" id="armchek1" name="foo" value="1" onclick="alertbox(this)" '.$checkedarms1.' /><input type="checkbox" name="foo" id="armchek2" value="1" onclick="alertbox2(this)" '.$checkedarms2.' /><br>';
 
 //Hit location: body
 $body = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM body WHERE ID_SURVIVOR = $survivor_id"));
@@ -165,7 +165,7 @@ else{$checkedbody1 = "";}
 if ($body['CHECKBOX2'] == 1){$checkedbody2 = "checked = 'checked'";}
 else{$checkedbody2 = "";}
 echo 'Body: ';
-echo'<input type="number" name="body" id="body" value= "'. $body['BODY'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedbody1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedbody2.' /><br>';
+echo'<input type="number" name="body" id="body" value= "'. $body['BODY'].'"><input type="checkbox" name="foo" value="1" id="bodychek1" onclick="alertbox(this)"'.$checkedbody1.' /><input type="checkbox" name="foo" value="1" id="bodychek2" onclick="alertbox2(this)" '.$checkedbody2.' /><br>';
 
 //Hit location: waist
 $waist = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM waist WHERE ID_SURVIVOR = $survivor_id"));
@@ -184,7 +184,7 @@ else
 $checkedwaist2 = "";
 }
 echo 'Waist: ';
-echo'<input type="number" name="waist" id="waist" value= "'. $waist['WAIST'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedwaist1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedwaist2.' /><br>';
+echo'<input type="number" name="waist" id="waist" value= "'. $waist['WAIST'].'"><input type="checkbox" name="foo" id="waistchek1" value="1" onclick="alertbox(this)"'.$checkedwaist1.' /><input type="checkbox" name="foo" id="waistchek2" value="1" onclick="alertbox2(this)" '.$checkedwaist2.' /><br>';
 
 //Hit location: legs
 $legs = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM legs WHERE ID_SURVIVOR = $survivor_id"));
@@ -203,7 +203,7 @@ else
 $checkedlegs2 = "";
 }
 echo 'Legs: ';
-echo'<input type="number" name="legs" id="legs" value= "'. $legs['LEGS'].'"><input type="checkbox" name="foo" value="1" onclick="alertbox(this)"'.$checkedlegs1.' /><input type="checkbox" name="foo" value="1" onclick="alertbox2(this)" '.$checkedlegs2.' /><br>';
+echo'<input type="number" name="legs" id="legs" value= "'. $legs['LEGS'].'"><input type="checkbox" name="foo" value="1" id="legschek1" onclick="alertbox(this)"'.$checkedlegs1.' /><input type="checkbox" name="foo" value="1" id="legschek2" onclick="alertbox2(this)" '.$checkedlegs2.' /><br>';
 
 //Hunt XP
 $hunt_xp = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM hunt_xp WHERE ID_SURVIVOR = $survivor_id"));
