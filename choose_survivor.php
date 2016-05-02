@@ -59,5 +59,9 @@ mysqli_close($con);
     ?>
         <input type="submit" value="Submit">
          </form>
+         
+         <a href="#">Timeline</a><br>
+          <a href="#">Principals/milestones</a><br>
+           <a href="#">Ressources</a> 
 </body>
 </html>
