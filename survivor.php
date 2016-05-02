@@ -6,6 +6,11 @@ require_once 'head.php';
 ?>
  
 <body>
+<style>
+button, input, optgroup, select, textarea {
+    color: black;
+}
+</style>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/calcul.js"></script> <!--calcul primary stat-->
