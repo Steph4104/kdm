@@ -54,4 +54,7 @@ mysqli_close($con);
           <a href="#">Principals/milestones</a><br>
            <a href="#">Ressources</a> 
 </body>
+<?php
+require_once 'footer.php';
+?>
 </html>

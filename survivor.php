@@ -360,4 +360,7 @@ echo $sql;
         
      
 </body>
+<?php
+require_once 'footer.php';
+?>
 </html>
