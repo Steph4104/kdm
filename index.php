@@ -33,7 +33,7 @@ if (mysqli_connect_errno())
 if ((empty($_GET['username'])) || (empty($_GET['password']))){
 
 ?>
-    <form id='login' action='login.php' method='get' accept-charset='UTF-8'>
+    <form id='login' action='NewLoad.html' method='get' accept-charset='UTF-8'>
 Login<br>
 <input type='hidden' name='submitted' id='submitted' value='1'/>
  
