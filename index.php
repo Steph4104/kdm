@@ -1,5 +1,7 @@
+<?php
+ob_start();
+?>
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -50,23 +52,15 @@ Login<br>
 }else{
     $username = $_GET['username'];
     $password = $_GET['password'];
-    
 $login = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM login WHERE username = '$username'"));
-
     if(!$login)
   {
-  // Fetch one and one row
-    
+  // Fetch one and one row 
     echo "ERROR! T'as mal entré tes affaires!";
-}else{
-     header('Location: index.html');        
-}
-
+}else{header('Location:index.html');}
 mysqli_close($con);
-
- 
 }
-    ?>
+?>
         
 </body>
 </html>

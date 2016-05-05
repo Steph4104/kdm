@@ -304,6 +304,10 @@ if ($result=mysqli_query($con,$sql))
 
 echo' <input type="submit" value="Submit">';
 echo '</form>';
+
+echo'<div id="severe_injury_box" style="display:none">';
+require("severe_injury.php");
+echo '</div>';
 //Hunt XP
 //$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS,weapon.W_EXPENTION,weapon.WEAPON_NAME,survivors.ID_SURVIVOR, settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT INNER JOIN weapon ON survivors.ID_SURVIVOR = weapon.ID_SURVIVOR");
 //$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS, settlement.NAME_SETTELMENT,settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT WHERE ID_SURVIVOR = $survivor_id");

@@ -1,5 +1,5 @@
 
-<!doctype html>
+<!--<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body>
+<body>-->
     <?php
 
 if ((empty($_GET['roll'])) || (empty($_GET['location']))){
@@ -18,7 +18,13 @@ if ((empty($_GET['roll'])) || (empty($_GET['location']))){
     <label>Enter your roll</label>
    <input type="number" name="roll" id="roll" value=''>
     <label>Enter your location</label>
-    <input type="text" name="location" id="location" value=''>
+    <select id="location" name="location">
+    <option>Head</option>
+    <option>Arm</option>
+    <option>Body</option>
+    <option>Waist</option>
+    <option>Leg</option>
+    </select>
     <input type="submit" value="MAGIC">
 </form>
     <?php }else{
@@ -38,6 +44,6 @@ $name = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM severe_injury WHERE
 echo'Hello World!';
     echo $name["Name"];
 }?>
-</body>
-</html>
+<!--</body>
+</html>-->
 
