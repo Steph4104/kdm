@@ -1,19 +1,10 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+    <?php require_once 'head.php';?>
 
-  <title>KDM</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
-
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<body>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/calcul.js"></script> <!--calcul primary stat-->
      <script src="js/validation.js"></script><!--validation hit location-->
@@ -29,8 +20,6 @@ $(function() {
 
 
     </script>
-</head>
-<body>
   <script src="js/scripts.js"></script>   
     
 	
