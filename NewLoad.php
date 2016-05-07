@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <?php require_once 'head.php';?>
@@ -26,8 +30,6 @@
 <!--		<button type="button" class="btn btn-default btn-block">Load Game</button>-->
     </div>    
 </div>
-
-
 </div>
 
 

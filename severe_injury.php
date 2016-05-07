@@ -1,14 +1,7 @@
+<?php
+ob_start();
 
-<!--<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-</head>
-<body>-->
-    <?php
+
 
 if ((empty($_GET['roll'])) || (empty($_GET['location']))){
 
@@ -41,8 +34,8 @@ $name = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM severe_injury WHERE
     if (!$name){
      echo("Error description: " . mysqli_error($con));
     }
-echo'Hello World!';
-    echo $name["Name"];
+    
+    header('Location: survivor.php?severe_injury='.$name["Name"]);
 }?>
 <!--</body>
 </html>-->

@@ -13,7 +13,8 @@ function alertbox2(mycheckbox) {
    if($(element1).is(':checked')){
        if (mycheckbox.checked){
         alert('SEVERE INJURY!');
-            $("#severe_injury_box").show();
+           // $("#severe_injury_box").show();
+            $('#myModal').modal();
             
        }
     }else{

@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!doctype html>
 
 <html lang="en">
@@ -20,8 +24,12 @@ $(function() {
 
 
     </script>
-  <script src="js/scripts.js"></script>   
-    
+  <script src="js/bootstrap.js"></script>   
+    <style>
+    input, button, select, textarea {
+    color: black;
+}
+    </style>
 	
 <?php
 require_once 'database.php';
@@ -31,8 +39,11 @@ if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
+if (empty($_SESSION['survivor_id'])){
+$_SESSION['survivor_id'] = $_GET['id'];
+}
+$survivor_id = $_SESSION['survivor_id'];
 
-$survivor_id = $_GET['id'];
 echo '<form action="action_page.php">';
 //Name
 
@@ -290,71 +301,30 @@ if ($result=mysqli_query($con,$sql))
 
 }
 
-
 echo' <input type="submit" value="Submit">';
 echo '</form>';
-
-echo'<div id="severe_injury_box" style="display:none">';
-require("severe_injury.php");
-echo '</div>';
-//Hunt XP
-//$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS,weapon.W_EXPENTION,weapon.WEAPON_NAME,survivors.ID_SURVIVOR, settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT INNER JOIN weapon ON survivors.ID_SURVIVOR = weapon.ID_SURVIVOR");
-//$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS, settlement.NAME_SETTELMENT,settlement.EXPENTION FROM survivors INNER JOIN settlement ON survivors.SETTLEMENT_ID = settlement.ID_SETTELMENT WHERE ID_SURVIVOR = $survivor_id");
-//$test =mysqli_query($con, " SELECT survivors.NAME_SURVIVORS, weapon.WEAPON_NAME, weapon.EXPENTION FROM survivors INNER JOIN weapon ON survivors.ID_SURVIVOR = weapon.ID_SURVIVOR ");                    
-//$test = mysqli_query($con,"SELECT * FROM weapon");
-//echo 'Hunt XP: ' . $test['ID_SURVIVOR'].'<br>';
-//print_r($test);
-/*SELECT   A.nom_artiste, A.prenom_artiste, I.nom_instrument 
-FROM     jouer J
-LEFT JOIN artiste A ON J.ex_artiste=A.id_artiste
-LEFT JOIN instrument I ON J.ex_instrument = I.id_instrument
-WHERE    ex_concert = 1
-ORDER BY I.nom_artiste ;*/
-/*
-  while ($row=mysqli_fetch_assoc($test))
-    {
-    
-    echo 'extention: '. $row['NAME_SURVIVORS'].' and survivor: '. $row['EXPENTION'].'<br>';
-      $expention = $row['EXPENTION'];
-   // printf ("%s (%s)\n",$row[0],$row[1]);
-    }
-    echo $expention;*/
-/*
-$sql="SELECT * FROM weapon WHERE W_EXPENTION = 1";
-
-if ($result=mysqli_query($con,$sql))
-  {
-  // Fetch one and one row
-    
-    echo "<select name='id'>";
-  while ($row=mysqli_fetch_row($result))
-    {
-    echo '<option value="'.$row[1].'">'.$row[0].'</option>';
-   // printf ("%s (%s)\n",$row[0],$row[1]);
-    }
-      echo "</select>";
-
-}
-*/
-
-
-
-/*
-
-
-
-
-
-$sql = (mysqli_query($con,"SELECT * FROM weapon"));
-
-print_r($sql);
-echo $sql;
- */
-
-
- 
-    
     ?>
+    
+
+<!-- Modal severe injury -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <?php
+require("severe_injury.php");
+          ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
         
      
 </body>

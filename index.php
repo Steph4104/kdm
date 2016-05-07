@@ -1,5 +1,6 @@
 <?php
 ob_start();
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +22,7 @@ if (mysqli_connect_errno())
 if ((empty($_GET['username'])) || (empty($_GET['password']))){
 
 ?>
-    <form id='login' action='NewLoad.html' method='get' accept-charset='UTF-8'>
+    <form id='login' action='index.php' method='get' accept-charset='UTF-8'>
 Login<br>
 <input type='hidden' name='submitted' id='submitted' value='1'/>
  
@@ -40,12 +41,14 @@ Login<br>
 }else{
     $username = $_GET['username'];
     $password = $_GET['password'];
-$login = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM login WHERE username = '$username'"));
+$login = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM login WHERE username = '$username' AND password = '$password'"));
     if(!$login)
   {
   // Fetch one and one row 
     echo "ERROR! T'as mal entré tes affaires!";
-}else{header('Location:index.html');}
+}else{
+        $_SESSION['name'] = $login['name'];
+        header('Location:NewLoad.php');}
 mysqli_close($con);
 }
 ?>
