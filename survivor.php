@@ -13,6 +13,7 @@ session_start();
     <script src="js/calcul.js"></script> <!--calcul primary stat-->
      <script src="js/validation.js"></script><!--validation hit location-->
     <script>
+
 $(function() {
     $('#no_survivols').click(function() {
         var cb1 = $('#no_survivols').is(':checked');
@@ -22,6 +23,31 @@ $(function() {
 
  });
 
+
+
+function showUser(str,str2) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+             
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        };
+       
+        xmlhttp.open("GET","severe_injury.php?q="+str+"&q2="+str2,true);
+        xmlhttp.send();
+    }
+}
 
     </script>
   <script src="js/bootstrap.js"></script>   
@@ -304,7 +330,6 @@ if ($result=mysqli_query($con,$sql))
 echo' <input type="submit" value="Submit">';
 echo '</form>';
     ?>
-    
 
 <!-- Modal severe injury -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -315,9 +340,34 @@ echo '</form>';
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        <?php
-require("severe_injury.php");
-          ?>
+          <form > 
+         <input type="number" name="roll" id="roll" value='' >
+<select name="location" id="location" >
+ <option value="Head">Head</option>
+    <option value="Arm">Arm</option>
+    <option value="Body">Body</option>
+    <option value="Waist">Waist</option>
+    <option value="Leg">Leg</option>
+  </select>
+          <input value="MAGIC" onclick="showUser(document.getElementById('location').value, document.getElementById('roll').value)"; >
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+<!--
+    <label>Enter your roll</label>
+   <input type="number" name="roll" id="roll" value=''>
+    <label>Enter your location</label>
+    <select name="location" onchange="showUser(this.value)">
+    <option value="Head">Head</option>
+    <option value="Arm">Arm</option>
+    <option value="Body">Body</option>
+    <option value="Waist">Waist</option>
+    <option value="Leg">Leg</option>
+    </select>
+    <input type="submit" value="MAGIC" >
+    -->
+
+          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -325,7 +375,11 @@ require("severe_injury.php");
     </div>
   </div>
 </div>
-        
-     
+      
+
+
+
+
+   
 </body>
 </html>
