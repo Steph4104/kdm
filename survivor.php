@@ -55,6 +55,11 @@ function showUser(str,str2) {
     input, button, select, textarea {
     color: black;
 }
+        .modal{
+        color:black;
+            border-color:black;
+            
+        }
     </style>
 	
 <?php
@@ -70,24 +75,24 @@ $_SESSION['survivor_id'] = $_GET['id'];
 }
 $survivor_id = $_SESSION['survivor_id'];
 
-echo '<form action="action_page.php">';
+echo '<form action="save.php" method="POST">';
 //Name
 
 $name = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM survivors WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Name: ' . $name['NAME_SURVIVORS'].'<br>';
 echo'Name:
-<input type="text" name="name" value= '.$name["NAME_SURVIVORS"].'>';
+<input type="text" name="name" id="name" value= '.$name["NAME_SURVIVORS"].'>';
 //Surname
 $surname = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM survivors WHERE ID_SURVIVOR = $survivor_id"));
 echo'Surname:
-<input type="text" name="surname" value= '.$name["SURNAME_SURVIVORS"].'><br>';
+<input type="text" name="surname" id="surname" value= '.$name["SURNAME_SURVIVORS"].'><br>';
 //echo 'Surname: ' . $surname['SURNAME_SURVIVORS'].'<br>';
 //Sexe
 $sexe = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM sexe WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Sexe: ' . $sexe['SEXE'].'<br>';
 ?>
 Sexe:
-<select>
+<select id='sexe' name='sexe'>
     <option value="F" <?php if($sexe['SEXE'] =='F'){echo'selected=selected';}  ?> >Female</option>
   <option value="H"<?php if($sexe['SEXE'] =='H'){echo'selected=selected';}  ?> >Man</option>
 </select>
@@ -111,44 +116,50 @@ echo'Bleed:
 <input type="number" name="bleed" value= '. $bleed['BLEED'].'><br>';
 echo'<input type="checkbox" name="cannot_survivols" id="no_survivols" value="no_survivol">Cannot spend survivol<br>';
 //Primary stat
-$primary_stat = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM primary_stat WHERE ID_SURVIVOR = $survivor_id"));
+$movement = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM movement WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Movement: ' . $primary_stat['MOVEMENT'].'<br>';
 
 echo'Movement:
 <input type="number" name="movement" id="movement" readonly="readonly" value= "5"><br>
-Gear:<input type="number" name="gear_movement" id="gear_movement" value= "">
-Survivor:<input type="number" name="survivor_movement" id="survivor_movement" value= '. $primary_stat['MOVEMENT'].'>
-Special:<input type="number" name="special_movement" id="special_movement" value= ""><br><br>';
+Gear:<input type="number" name="gear_movement" id="gear_movement" value= '. $movement['GEAR_MOVEMENT'].'>
+Survivor:<input type="number" name="survivor_movement" id="survivor_movement" value= '. $movement['SURVIVOR_MOVEMENT'].'>
+Special:<input type="number" name="special_movement" id="special_movement" value= '. $movement['SPECIAL_MOVEMENT'].'><br><br>';
 
+$accuracy = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM accuracy WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Accuracy: ' . $primary_stat['ACCURACY'].'<br>';
 
 echo'Accuracy:
 <input type="number" name="accuracy" id="accuracy" readonly="readonly" value= ""><br>
-Gear:<input type="number" name="gear_accuracy" id="gear_accuracy" value= "">
-Survivor:<input type="number" name="survivor_accuracy" id="survivor_accuracy" value= '. $primary_stat['ACCURACY'].'>
-Special:<input type="number" name="special_accuracy" id="special_accuracy" value= ""><br><br>';
+Gear:<input type="number" name="gear_accuracy" id="gear_accuracy" value= '. $accuracy['GEAR_ACCURACY'].'>
+Survivor:<input type="number" name="survivor_accuracy" id="survivor_accuracy" value= '. $accuracy['SURVIVOR_ACCURACY'].'>
+Special:<input type="number" name="special_accuracy" id="special_accuracy" value= '. $accuracy['SPECIAL_ACCURACY'].'><br><br>';
 
+$strenght = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM strenght WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Strenght: ' . $primary_stat['STRENGHT'].'<br>';
 
 echo'Strenght:
 <input type="number" name="strenght" id="strenght" readonly="readonly" value= ""><br>
-Gear:<input type="number" name="gear_strenght" id="gear_strenght" value= "">
-Survivor:<input type="number" name="survivor_strenght" id="survivor_strenght" value= '. $primary_stat['STRENGHT'].'>
-Special:<input type="number" name="specialstrenght" id="special_strenght" value= ""><br><br>';
+Gear:<input type="number" name="gear_strenght" id="gear_strenght" value= '. $strenght['GEAR_STRENGHT'].'>
+Survivor:<input type="number" name="survivor_strenght" id="survivor_strenght" value= '. $strenght['SURVIVOR_STRENGHT'].'>
+Special:<input type="number" name="specialstrenght" id="special_strenght" value= '. $strenght['SPECIAL_STRENGHT'].'><br><br>';
+
+$evasion = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM evasion WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Evasion: ' . $primary_stat['EVASION'].'<br>';
 
 echo'Evasion:
 <input type="number" name="evasion" id="evasion" readonly="readonly" value= ""><br>
-Gear:<input type="number" name="gear_evasion" id="gear_evasion" value= "">
-Survivor:<input type="number" name="survivor_evasion" id="survivor_evasion" value= '. $primary_stat['EVASION'].'>
-Special:<input type="number" name="special_evasion" id="special_evasion" value= ""><br><br>';
+Gear:<input type="number" name="gear_evasion" id="gear_evasion" value= '. $evasion['GEAR_EVASION'].'>
+Survivor:<input type="number" name="survivor_evasion" id="survivor_evasion" value= '. $evasion['SURVIVOR_EVASION'].'>
+Special:<input type="number" name="special_evasion" id="special_evasion" value= '. $evasion['SPECIAL_EVASION'].'><br><br>';
+
+$luck = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM luck WHERE ID_SURVIVOR = $survivor_id"));
 //echo 'Luck: ' . $primary_stat['LUCK'].'<br>';
 
 echo'Luck:
 <input type="number" name="luck" id="luck" readonly="readonly" value= ""><br>
-Gear:<input type="number" name="gear_luck" id="gear_luck" value= "">
-Survivor:<input type="number" name="survivor_luck" id="survivor_luck" value= '. $primary_stat['LUCK'].'>
-Special:<input type="number" name="special_luck" id="special_luck" value= ""><br><br>
+Gear:<input type="number" name="gear_luck" id="gear_luck" value='. $luck['GEAR_LUCK'].'>
+Survivor:<input type="number" name="survivor_luck" id="survivor_luck" value= '. $luck['SURVIVOR_LUCK'].'>
+Special:<input type="number" name="special_luck" id="special_luck" value= '. $luck['SPECIAL_LUCK'].'><br><br>
 <input type="button" value=" Calculer " onclick="calcul();" /><br>';
 //echo 'Speed: ' . $primary_stat['SPEED'].'<br>';
 
@@ -349,25 +360,10 @@ echo '</form>';
     <option value="Waist">Waist</option>
     <option value="Leg">Leg</option>
   </select>
-          <input value="MAGIC" onclick="showUser(document.getElementById('location').value, document.getElementById('roll').value)"; >
+          <input type="button" value="MAGIC" onclick="showUser(document.getElementById('location').value, document.getElementById('roll').value)"; >
 </form>
 <br>
 <div id="txtHint"><b>Person info will be listed here...</b></div>
-<!--
-    <label>Enter your roll</label>
-   <input type="number" name="roll" id="roll" value=''>
-    <label>Enter your location</label>
-    <select name="location" onchange="showUser(this.value)">
-    <option value="Head">Head</option>
-    <option value="Arm">Arm</option>
-    <option value="Body">Body</option>
-    <option value="Waist">Waist</option>
-    <option value="Leg">Leg</option>
-    </select>
-    <input type="submit" value="MAGIC" >
-    -->
-
-          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
