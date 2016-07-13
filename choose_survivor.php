@@ -1,9 +1,13 @@
+<?php
+ob_start();
+session_start();
+?>
 <!doctype html>
 
 <html lang="en">
-<?php
-require_once 'head.php';
-?>
+
+<?php require_once 'head.php';?>
+
 
 <body>
   <script src="js/scripts.js"></script>
@@ -24,7 +28,7 @@ if (mysqli_connect_errno())
     Choisissez TON survivor (Tue le pas please)
 <?php
 $settlement_id = $_GET['id'];
-
+$_SESSION['settlement_id'] = $settlement_id;
 $sql="SELECT * FROM survivors WHERE SETTLEMENT_ID = $settlement_id";
 
 if ($result=mysqli_query($con,$sql))

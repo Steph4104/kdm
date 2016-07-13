@@ -13,11 +13,14 @@ function alertbox2(mycheckbox) {
    if($(element1).is(':checked')){
        if (mycheckbox.checked){
         alert('SEVERE INJURY!');
+           // $("#severe_injury_box").show();
+            $('#myModal').modal();
             
        }
     }else{
          //alert('Coche l'autre case d'avant toto'); 
-          $(mycheckbox).attr('checked', false)
+          $(mycheckbox).attr('checked', false);
+        $("#severe_injury_box").hide();
  
         
       

@@ -1,9 +1,13 @@
+<?php
+ob_start();
+session_start();
+?>
 <!doctype html>
 
 <html lang="en">
-<?php
-require_once 'head.php';
-?>
+
+<?php require_once 'head.php';?>
+
 
 <body>
   <script src="js/scripts.js"></script>
@@ -33,10 +37,8 @@ if ($result=mysqli_query($con,$sql))
   while ($row=mysqli_fetch_row($result))
     {
     echo '<option value="'.$row[0].'">'.$row[1].'</option>';
-   // printf ("%s (%s)\n",$row[0],$row[1]);
     }
       echo "</select>";
-  // Free result set
   mysqli_free_result($result);
 }
 
